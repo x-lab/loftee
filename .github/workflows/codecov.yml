@@ -19,6 +19,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
+          prove -l
           cover -report codecov
                 
       # - name: Install dependencies
