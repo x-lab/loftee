@@ -15,7 +15,7 @@ jobs:
         run: cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
 
       - name: Build project
-        run: perl Build.PL
+        run: perl Makefile.PL
 
       - name: Run tests and generate coverage report
         run: cover -test -report codecov
