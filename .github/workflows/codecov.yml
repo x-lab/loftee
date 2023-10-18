@@ -24,6 +24,9 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          directory: ./cover_db  # 请将此目录修改为实际的覆盖率文件目录
+          root: ./loftee  # 请将此目录修改为项目的根目录
                 
       # - name: Install dependencies
       #   run: cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
