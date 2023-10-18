@@ -22,12 +22,17 @@ jobs:
       - name: perl -V
         run: perl -V
       - run: prove -lv t
-
-  upload-coverage:
-    runs-on: ubuntu-latest
-    needs: perl
-    steps:
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+      
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  # upload-coverage:
+  #   runs-on: ubuntu-latest
+  #   needs: perl
+  #   steps:
+  #     - name: Upload coverage to Codecov
+  #       uses: codecov/codecov-action@v2
+  #       env:
+  #         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
