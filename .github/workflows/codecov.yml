@@ -19,11 +19,11 @@ jobs:
         run: |
           find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
       
-      - name: List files in working directory
-        run: ls -R
+      # - name: List files in working directory
+      #   run: ls -R
 
       - name: List files in directory
-        run: ls ./loftee/cover_db/runs/1697604175.2275.65168
+        run: ls ./cover_db/runs/1697608097.2274.42075/cover.14
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
