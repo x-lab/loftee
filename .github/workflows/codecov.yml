@@ -11,26 +11,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
-
-    - name: Configure and build
-      run: |
-          if [ -f "perl Makefile.PL" ]; then
-            perl Makefile.PL
-            make
-          elif [ -f "perl Build.PL" ]; then
-            perl Build.PL
-            ./Build
-          elif [ -f "configure" ]; then
-            ./configure
-            make
-          else
-            echo "No build script found!"
-            exit 1
-          fi
-
-      - name: Run tests and generate coverage report
-        run: cover -test -report codecov
+      - name: Run codecov GitHub Action
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: |
+          cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecovbash
+          perl Build.PL 
+          cover -test -report codecov
+          
+      # - name: Install dependencies
+      #   run: cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
+
+    # - name: Configure and build
+    #   run: |
+    #       if [ -f "perl Makefile.PL" ]; then
+    #         perl Makefile.PL
+    #         make
+    #       elif [ -f "perl Build.PL" ]; then
+    #         perl Build.PL
+    #         ./Build
+    #       elif [ -f "configure" ]; then
+    #         ./configure
+    #         make
+    #       else
+    #         echo "No build script found!"
+    #         exit 1
+    #       fi
+
+    #   - name: Run tests and generate coverage report
+    #     run: cover -test -report codecov
+    #     env:
+    #       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
