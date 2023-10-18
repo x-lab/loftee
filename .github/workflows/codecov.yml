@@ -31,9 +31,10 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./cover_db/runs/1697608097.2274.42075
           flags: unittests
-          file: ./cover_db/runs/1697608097.2274.42075/cover.14  # 根据实际情况调整文件名
-          verbose: true
+          file: ./cover_db/runs/1697608097.2274.42075/cover.14
           clean: false
+          verbose: true
+
 
       # - name: Upload coverage to Codecov
       #   uses: codecov/codecov-action@v2
