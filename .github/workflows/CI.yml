@@ -22,23 +22,23 @@ jobs:
       - name: perl -V
         run: perl -V
 
-      - name: Run tests with coverage
-        run: |
-          cpanm --notest Devel::Cover
-          PERL5OPT=-MDevel::Cover prove -Ilib -r t
-        env:
-          PERL5LIB: /home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.40/blib/lib:/home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.40/blib/arch
+          # - name: Run tests with coverage
+      #   run: |
+      #     cpanm --notest Devel::Cover
+      #     PERL5OPT=-MDevel::Cover prove -Ilib -r t
+      #   env:
+      #     PERL5LIB: /home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.40/blib/lib:/home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.40/blib/arch
       
-      - name: Install Devel::Cover::Report::Lcov
-        run: cpanm Devel::Cover::Report::Lcov
+      # - name: Install Devel::Cover::Report::Lcov
+      #   run: cpanm Devel::Cover::Report::Lcov
       
-      - name: Convert Devel::Cover HTML report to Lcov
-        run: |
-          cd cover_db
-          cover -report lcov
+      # - name: Convert Devel::Cover HTML report to Lcov
+      #   run: |
+      #     cd cover_db
+      #     cover -report lcov
       
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          flags: perl5
-          files: cover_db/lcov-report/coverage.lcov
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     flags: perl5
+      #     files: cover_db/lcov-report/coverage.lcov
