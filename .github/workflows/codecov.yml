@@ -19,15 +19,24 @@ jobs:
         run: |
           find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
           # Ensure the coverage report is generated in the cover_db directory
-  
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./loftee/cover_db/runs/1697603745.2273.29042
-          root: ./loftee
+          directory: ./loftee/cover_db/runs/1697604175.2275.65168  # 请将此目录修改为实际的覆盖率文件目录
           flags: unittests
+          file: ./loftee/cover_db/runs/1697604175.2275.65168/coverage.json  # 请将此路径修改为实际的覆盖率文件路径
           verbose: true
+  
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     directory: ./loftee/cover_db/runs/1697603745.2273.29042
+      #     root: ./loftee
+      #     flags: unittests
+      #     verbose: true
 
                 
       # - name: Install dependencies
