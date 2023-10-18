@@ -22,7 +22,14 @@ jobs:
       - name: perl -V
         run: perl -V
       # - run: prove -lv t
-      - run: perl -MDevel::Cover prove -Ilib -r t
+      # - run: perl -MDevel::Cover prove -Ilib -r t
+
+      - name: Run tests with coverage
+        run: |
+          cpanm --notest Devel::Cover
+          PERL5OPT=-MDevel::Cover prove -Ilib -r t
+        env:
+          PERL5LIB: /home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.36/blib/lib:/home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.36/blib/arch
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
