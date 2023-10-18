@@ -23,7 +23,7 @@ jobs:
       #   run: ls -R
 
       - name: List files in directory
-        run: ls ./cover_db/runs/1697608097.2274.42075
+        run: ls ./cover_db/runs
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
