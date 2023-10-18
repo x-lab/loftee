@@ -21,8 +21,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: perl -V
         run: perl -V
-      - run: prove -lv t
-      
+      # - run: prove -lv t
+      - run: perl -MDevel::Cover prove -Ilib -r t
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
