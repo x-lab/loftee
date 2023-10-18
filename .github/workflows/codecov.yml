@@ -18,7 +18,6 @@ jobs:
       - name: Run tests and generate coverage report
         run: |
           find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
-          # Ensure the coverage report is generated in the cover_db directory
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
