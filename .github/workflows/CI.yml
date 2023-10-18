@@ -29,7 +29,13 @@ jobs:
           cpanm --notest Devel::Cover
           PERL5OPT=-MDevel::Cover prove -Ilib -r t
         env:
-          PERL5LIB: /home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.36/blib/lib:/home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.36/blib/arch
+          PERL5LIB: /home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.40/blib/lib:/home/runner/.cpanm/work/1634619180.12016/Devel-Cover-1.40/blib/arch
+      
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: perl5
+          files: ./cover_db
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
