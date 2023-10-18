@@ -29,11 +29,20 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./loftee/cover_db/runs/1697604175.2275.65168  # 请将此目录修改为实际的覆盖率文件目录
+          directory: ./cover_db/runs/1697608097.2274.42075
           flags: unittests
-          file: ./loftee/cover_db/runs/1697604175.2275.65168/coverage.json  # 请将此路径修改为实际的覆盖率文件路径
+          file: ./cover_db/runs/1697608097.2274.42075/cover.14  # 根据实际情况调整文件名
           verbose: true
-          clean: false
+
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     directory: ./loftee/cover_db/runs/1697604175.2275.65168  # 请将此目录修改为实际的覆盖率文件目录
+      #     flags: unittests
+      #     file: ./loftee/cover_db/runs/1697604175.2275.65168/coverage.json  # 请将此路径修改为实际的覆盖率文件路径
+      #     verbose: true
+      #     clean: false
   
       # - name: Upload coverage to Codecov
       #   uses: codecov/codecov-action@v2
