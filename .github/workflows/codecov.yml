@@ -15,12 +15,15 @@ jobs:
         run: |
           cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
 
-      - name: Run codecov GitHub Action
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Run tests and generate coverage report
         run: |
-          prove -l
-          cover -report codecov
+          find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
+          # Ensure the coverage report is generated in the cover_db directory
+  
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
                 
       # - name: Install dependencies
       #   run: cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
