@@ -22,6 +22,9 @@ jobs:
       - name: perl -V
         run: perl -V
 
+      - name: Install Devel::Cover::Report::Lcov
+        run: cpanm Devel::Cover::Report::Lcov
+
       - name: Run tests with coverage
         run: |
           cpanm --notest Devel::Cover
