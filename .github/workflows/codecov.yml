@@ -20,15 +20,15 @@ jobs:
           find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
 
       - name: List files in directory
-        run: ls ./loftee/cover_db/runs/1697604175.2275.65168
+        run: ls /__w/loftee/loftee/cover_db/runs/1697607725.2273.50564
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./loftee/cover_db/runs/1697604175.2275.65168  # 请将此目录修改为实际的覆盖率文件目录
+          directory: /__w/loftee/loftee/cover_db/runs/1697607725.2273.50564  # 请将此目录修改为实际的覆盖率文件目录
           flags: unittests
-          file: ./loftee/cover_db/runs/1697604175.2275.65168/coverage.json  # 请将此路径修改为实际的覆盖率文件路径
+          file: /__w/loftee/loftee/cover_db/runs/1697607725.2273.50564  # 请将此路径修改为实际的覆盖率文件路径
           verbose: true
           clean: false
   
