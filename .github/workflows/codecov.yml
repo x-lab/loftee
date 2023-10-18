@@ -11,13 +11,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: |
+          cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
+
       - name: Run codecov GitHub Action
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
-          cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecovbash
-          cover -test -report codecov
-          
+          cover -report codecov
+                
       # - name: Install dependencies
       #   run: cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
 
