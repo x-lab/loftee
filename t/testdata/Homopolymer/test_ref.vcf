@@ -1,0 +1,35 @@
+##fileformat=VCFv4.2
+##FILTER=<ID=PASS,Description="All filters passed">
+##buildName=GRCh38
+##gi-file-version=1.1.0
+##gi-generation-date=2023-03-23
+##INFO=<ID=ABSENT,Number=.,Type=String,Description="list of sample data labels or names for which the variant is absent">
+##INFO=<ID=ALIGNERR,Number=0,Type=Flag,Description="if present indicates that there was a problem aligning the ref/alt to the reference build">
+##INFO=<ID=Allele_state,Number=.,Type=String,Description="Allele State as described by LMM (SampleData|Source|Version|Datetime|IsValid|Allele state|AD_ref|AD_alt|GT)">
+##INFO=<ID=Amino_Acid_Change,Number=.,Type=String,Description="LMM Definition - Amino Acid Change (SampleData|Source|Version|Datetime|IsValid|Gene|GeneIDs|Transcript|TranscriptIDs|Amino Acid Change|Type)">
+##INFO=<ID=COMMENTS,Number=.,Type=String,Description="comments">
+##INFO=<ID=Compound_Het,Number=.,Type=String,Description="(SampleData|Source|Version|Datetime|IsValid|Compound Het)">
+##INFO=<ID=Conservation_values,Number=.,Type=String,Description="(SampleData|Source|Version|Datetime|IsValid|Gene|GeneIDs|Transcript|TranscriptIDs|PhyloP|Phastcons|Gerp scores|nOrthos|ConservedOrthos|ConservedDistSpecies)">
+##INFO=<ID=dbSNP,Number=.,Type=String,Description="Annotations from dbSNP (SampleData|Source|Version|Datetime|IsValid|dbsnp id|VC)">
+##INFO=<ID=DNA_Change,Number=.,Type=String,Description="GIS-LMM DNA Change Definition (SampleData|Source|Version|Datetime|IsValid|Gene|GeneIDs|Transcript|TranscriptIDs|DNA Change|Type)">
+##INFO=<ID=Frequency,Number=.,Type=String,Description="Prevalence of alternative allele in the population (SampleData|Source|Version|Datetime|IsValid|RACE|AN|AF|FilterColumn)">
+##INFO=<ID=Frequency_quality,Number=.,Type=String,Description="Quality from population frequency databases (SampleData|Source|Version|Datetime|IsValid|FilterStatus|Coverage)">
+##INFO=<ID=Functional_Prediction,Number=.,Type=String,Description="Information from Functional prediction tools (SampleData|Source|Version|Datetime|IsValid|Gene|GeneIDs|Transcript|TranscriptIDs|Condel|MAPP|PolyPhen|SIFT|CADD|DANN|Mut.taster|Mut.assesser|Revel)">
+##INFO=<ID=Gene_information,Number=.,Type=String,Description="Gene level information including exon, intron and OMIM id (SampleData|Source|Version|Datetime|IsValid|Gene|GeneIDs|Transcript|TranscriptIDs|Gene Symbol|OMIM|HGNC_ID|GeneName)">
+##INFO=<ID=Interpretation,Number=.,Type=String,Description="Variant interpretation (SampleData|Source|Version|Datetime|IsValid|Classification|Disease|Inheritance|Lab Source|Classification Status|Classification Date|Evidence|Ids)">
+##INFO=<ID=LABSTATUS,Number=.,Type=String,Description="lab status">
+##INFO=<ID=LitRef,Number=.,Type=String,Description="Literature Reference (SampleData|Source|Version|Datetime|IsValid|LitRefPMID|LitRefAuthor|InterpretEvidence|LitYear)">
+##INFO=<ID=MaxAF,Number=.,Type=String,Description="MaxAF where AN>=500 and PopMax (SampleData|Source|Version|Datetime|IsValid|MaxAF|AN|Race|Source|HomCountAllRaces)">
+##INFO=<ID=PRESENT,Number=.,Type=String,Description="list of sample data labels or names for which the variant is present">
+##INFO=<ID=ProteinDomain,Number=.,Type=String,Description="Protein domain (SampleData|Source|Version|Datetime|IsValid|Gene|GeneIDs|Transcript|TranscriptIDs|ProteinDomain|ProteinDomain2|ProteinDomain3|ProteinDomain4|ProteinDomain5)">
+##INFO=<ID=Qual_Metrics_PPM_Eval,Number=.,Type=String,Description="Contains many quality fields (SampleData|Source|Version|Datetime|IsValid|QD|FS|DP|MQ|MQ0|Qual|GQ|PPM_Eval)">
+##INFO=<ID=Splicing_Prediction,Number=.,Type=String,Description="Scores for splicing prediction tools (SampleData|Source|Version|Datetime|IsValid|Gene|GeneIDs|Transcript|TranscriptIDs|NSS_distance|NSS_type|NSS_change|localSpliceEffect|HSF_RefScore|HSF_AltScore|SSF_refSScore|SSF_altScore|MaxEntScan_refScore|MaxEntScan_altScore)">
+##INFO=<ID=TAGS,Number=.,Type=String,Description="tags">
+##INFO=<ID=VariantEffect,Number=.,Type=String,Description="Consequence of variant (SampleData|Source|Version|Datetime|IsValid|Gene|GeneIDs|Transcript|TranscriptIDs|Consequence|DNAChange|CDS_pos|ProteinChange|RefCodon|AltCodon|Exon_num|Intron_num|varLocation)">
+##contig=<ID=6>
+##bcftools_mergeVersion=1.12+htslib-1.12
+##bcftools_mergeCommand=merge -m none -Oz -o added500_Improved_Restrictive_2.10.23_sorted_merged.vcf.gz annotated_PopSeq-ADDEDRESTRICTIVE_PopSeq_Improved_Restrictive_2.10.2023_annotation_subset_0_sorted.vcf.gz annotated_PopSeq-ADDEDRESTRICTIVE_PopSeq_Improved_Restrictive_2.10.2023_annotation_subset_1_sorted.vcf.gz annotated_PopSeq-ADDEDRESTRICTIVE_PopSeq_Improved_Restrictive_2.10.2023_annotation_subset_2_sorted.vcf.gz annotated_PopSeq-ADDEDRESTRICTIVE_PopSeq_Improved_Restrictive_2.10.2023_annotation_subset_3_sorted.vcf.gz annotated_PopSeq-ADDEDRESTRICTIVE_PopSeq_Improved_Restrictive_2.10.2023_annotation_subset_4_sorted.vcf.gz annotated_PopSeq-ADDEDRESTRICTIVE_PopSeq_Improved_Restrictive_2.10.2023_annotation_subset_5_sorted.vcf.gz annotated_PopSeq-ADDEDRESTRICTIVE_PopSeq_Improved_Restrictive_2.10.2023_annotation_subset_6_sorted.vcf.gz; Date=Thu Apr 27 10:17:22 2023
+##bcftools_viewVersion=1.10.2-132-g7cd6a05+htslib-1.10.2-139-g9067dee
+##bcftools_viewCommand=view -G added500_Improved_Restrictive_2.10.23_sorted_merged.vcf.gz; Date=Mon Jun 12 23:27:10 2023
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+6	32584358	.	T	AAAAAAAGGGGAAAA	.	PASS	. 

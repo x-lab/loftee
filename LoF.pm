@@ -233,6 +233,12 @@ sub run {
         }
     }
 
+    #hoompolymer
+    my $hoompolymer_flags = check_homopolymer($tv);
+    if ($hoompolymer_flags eq "Homopolymer"){
+        push(@info, 'Homopolymer_flag:' . $hoompolymer_flags);
+    }
+
     if ($vep_splice_lof || $other_lof) {
         $confidence = 'HC';
     } elsif ($loftee_splice_lof) {
@@ -351,6 +357,26 @@ sub DESTROY {
 }
 
 # Global functions
+sub check_homopolymer {
+    my $transcript_variation = shift;
+    my ($ref, $alt) = map {$_->feature_seq} @{$transcript_variation->get_all_TranscriptVariationAlleles()};
+    my $result= (check_for_homopolymer_error($ref)) || (check_for_homopolymer_error($alt));
+    return $result == 1 ? "Homopolymer":"";
+}
+
+sub check_for_homopolymer_error {
+    my ($string) = @_;
+    my $flag = 0;
+    my @substrings = $string =~ /(A+|G+|T+|C+)/g;
+    foreach my $substring (@substrings) {
+        my $length = length($substring);
+        if($length >= 5 && $length <= 7){
+            $flag = 1;
+        }
+        # print "$substring\t$length\n";
+    }
+    return $flag;
+}
 
 sub small_intron {
     my $transcript_variation = shift;
