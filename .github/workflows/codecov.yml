@@ -18,16 +18,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov Devel::Cover::Report::Lcov
+          cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
 
       - name: Run tests and generate coverage report
         run: |
           find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
-      
-      - name: Convert Devel::Cover HTML report to Lcov
-        run: |
-          cd cover_db
-          cover -report lcov
       
       - name: List files in directory
         run: ls ./cover_db
