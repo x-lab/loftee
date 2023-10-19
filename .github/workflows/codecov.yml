@@ -14,7 +14,7 @@ jobs:
     container: perl:latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@latest_version
 
       - name: Install dependencies
         run: |
@@ -28,7 +28,7 @@ jobs:
         run: ls ./cover_db
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@latest_version
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./cover_db/runs/1697608097.2274.42075
