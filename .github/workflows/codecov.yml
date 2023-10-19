@@ -1,62 +1,46 @@
-name: coverage
+name: Codecov
 
 on:
-  pull_request:
   push:
     branches:
-      - develop
+      - "*"
+    tags-ignore:
+      - "*"
+  pull_request:
 
 jobs:
-  build:
-    runs-on: 'ubuntu-latest'
-    name: Coverage
-    container:
-      image: perl:stable
+  coverage:
+    runs-on: ubuntu-latest
+    container: perl:latest
     steps:
-      - uses: actions/checkout@v2
-      - run: cpanm --quiet --notest --installdeps .
-      - run: cpanm --quiet --notest App::Yath Devel::Cover Devel::Cover::Report::Coveralls
-      - run: PERL5OPT=-MDevel::Cover yath test --qvf t/
-      - run: cover -report coveralls
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-# name: Codecov
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-# on:
-#   push:
+      - name: Install dependencies
+        run: |
+          cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov Devel::Cover::Report::Lcov
 
-# jobs:
-#   coverage:
-#     runs-on: ubuntu-latest
-#     container: perl:latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Install dependencies
-#         run: |
-#           cpanm --quiet --notest Module::Build Devel::Cover Devel::Cover::Report::Codecov
-
-#       - name: Run tests and generate coverage report
-#         run: |
-#           find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
+      - name: Run tests and generate coverage report
+        run: |
+          find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
       
-#       # - name: List files in working directory
-#       #   run: ls -R
+      - name: Convert Devel::Cover HTML report to Lcov
+        run: |
+          cd cover_db
+          cover -report lcov
+      
+      - name: List files in directory
+        run: ls ./cover_db
 
-#       - name: List files in directory
-#         run: ls ./cover_db/runs
-
-#       - name: Upload coverage to Codecov
-#         uses: codecov/codecov-action@v2
-#         with:
-#           token: ${{ secrets.CODECOV_TOKEN }}
-#           directory: ./cover_db/runs/1697608097.2274.42075
-#           flags: unittests
-#           file: ./cover_db/runs/1697608097.2274.42075/cover.14
-#           clean: false
-#           verbose: true
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./cover_db/runs/1697608097.2274.42075
+          flags: unittests
+          file: ./cover_db/runs/1697608097.2274.42075/cover.14
+          clean: false
+          verbose: true
 
 
       # - name: Upload coverage to Codecov
