@@ -25,7 +25,7 @@ jobs:
           find t/ -name '*.t' -exec perl -MDevel::Cover {} \;
       
       - name: List files in directory
-        run: ls ./cover_db
+        run: ls ./cover_db/runs
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
