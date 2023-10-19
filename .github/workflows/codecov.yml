@@ -34,7 +34,7 @@ jobs:
           directory: ./cover_db/runs/1697608097.2274.42075
           flags: unittests
           file: ./cover_db/runs/1697608097.2274.42075/cover.14
-          clean: true
+          clean: false
           verbose: true
 
 
