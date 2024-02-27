@@ -18,7 +18,91 @@ use_ok('Bio::EnsEMBL::VEP::OutputFactory');
 use_ok('Bio::EnsEMBL::VEP::Runner');
 
 my $header=LoF->get_header_info();
+ok($header, 'get_header_info is #!/usr/local/bin/perl 
+
+use strict;
+use warnings;
+
+use Test::More;
+
+use FindBin qw($Bin);
+use FindBin;
+use lib $FindBin::RealBin;
+use lib '/refs/loftee';
+
+use LoF;
+use TestingConfig;
+
+## BASIC TESTS
+##############
+
+# use_test
+use_ok('LoF');
+use_ok('Bio::EnsEMBL::VEP::OutputFactory');
+use_ok('Bio::EnsEMBL::VEP::Runner');
+
+my $header=LoF->get_header_info();
 ok($header, 'get_header_info is defined');
+is_deeply(
+    $header,
+    bless({
+        LoF => "Loss-of-function annotation (HC = High Confidence; LC = Low Confidence)",
+        LoF_filter => "Reason for LoF not being HC",
+        LoF_flags => "Possible warning flags for LoF",
+        LoF_info => "Info used for LoF annotation",
+    })
+);
+
+my $type=LoF->feature_types();
+ok($type, 'feature_types is defined');
+is_deeply(
+    $type,
+    bless(['Transcript'])
+);
+
+## METHOD_TESTS
+###############
+# test_none
+my $runner = TestingConfig::get_annotated_buffer_runner({
+    input_file => './testdata/Homopolymer/test_none.vcf'
+});
+my $result = TestingConfig::get_LoF_plugin($runner);
+is_deeply(
+    $result->{'LoF_info'},
+    'PERCENTILE:0.151061173533084,GERP_DIST:-304.5421182096,BP_DIST:676,DIST_FROM_LAST_EXON:663,50_BP_RULE:PASS'
+);
+
+# test_alt_ref
+my $runner = TestingConfig::get_annotated_buffer_runner({
+    input_file => './testdata/Homopolymer/test_ref_alt.vcf'
+});
+my $result = TestingConfig::get_LoF_plugin($runner);
+is_deeply(
+    $result->{'LoF_info'},
+    'Homopolymer_flag:Homopolymer,PERCENTILE:0.151061173533084,GERP_DIST:-304.5421182096,BP_DIST:676,DIST_FROM_LAST_EXON:663,50_BP_RULE:PASS'
+);
+
+#test_alt
+my $runner = TestingConfig::get_annotated_buffer_runner({
+    input_file => './testdata/Homopolymer/test_alt.vcf'
+});
+my $result = TestingConfig::get_LoF_plugin($runner);
+is_deeply(
+    $result->{'LoF_info'},
+    'Homopolymer_flag:Homopolymer,PERCENTILE:0.151061173533084,GERP_DIST:-304.5421182096,BP_DIST:676,DIST_FROM_LAST_EXON:663,50_BP_RULE:PASS'
+);
+
+#test_ref
+my $runner = TestingConfig::get_annotated_buffer_runner({ 
+    input_file => './testdata/Homopolymer/test_ref.vcf'
+});
+my $result = TestingConfig::get_LoF_plugin($runner);
+is_deeply(
+    $result->{'LoF_info'},
+    'Homopolymer_flag:Homopolymer,PERCENTILE:0.151061173533084,GERP_DIST:-304.5421182096,BP_DIST:676,DIST_FROM_LAST_EXON:663,50_BP_RULE:PASS'
+);
+
+done_testing();defined');
 is_deeply(
     $header,
     bless({
