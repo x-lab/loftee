@@ -181,6 +181,13 @@ sub run {
     my $vep_splice_lof = "splice_acceptor_variant" ~~ @consequences || "splice_donor_variant" ~~ @consequences;
     my $loftee_splice_lof = 0;
     my $lof_position = -1;
+    
+    # SpliceAI and Pangolin
+    if (defined $vf) {
+        my $line_ref = $vf->{'_line'};
+        my $INFO = get_spliceAI_pangolin($line_ref);
+        push(@info, $INFO);
+    }
 
     # splice predictions
     if ($self->{run_splice_predictions} && ($genic_variant && !($UTR_variant || $other_lof))) {
@@ -357,6 +364,30 @@ sub DESTROY {
 }
 
 # Global functions
+
+# spliceAI and pangolin
+sub get_spliceAI_pangolin{
+    my $line_ref= shift;
+    my $INFO = '';
+    my $CHROM = $line_ref->[0];
+    my $POS = $line_ref->[1];        
+    my $ID = $line_ref->[2];
+    my $REF = $line_ref->[3];
+    my $ALT = $line_ref->[4];
+    my $db_file = '/refs/loftee/test/home.db';
+    my $dbh = DBI->connect("dbi:SQLite:dbname=$db_file", '', '', { RaiseError => 1, AutoCommit => 1 });
+    my $query = "SELECT INFO FROM Splice WHERE CHROM = ? AND POS = ? AND ID = ? AND REF = ? AND ALT = ?";
+    my $sth = $dbh->prepare($query);
+    $sth->execute($CHROM, $POS, $ID, $REF, $ALT);
+    while (my $row = $sth->fetchrow_hashref) {
+        $INFO = $row->{INFO};
+    }
+    $sth->finish;
+    $dbh->disconnect;
+    return $INFO;
+}
+
+## homopolymer
 sub check_homopolymer {
     my $transcript_variation = shift;
     my ($ref, $alt) = map {$_->feature_seq} @{$transcript_variation->get_all_TranscriptVariationAlleles()};
